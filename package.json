@@ -22,9 +22,13 @@
   "homepage": "https://github.com/xepps/dice#readme",
   "devDependencies": {
     "jest": "^24.8.0",
+    "sinon": "^7.4.1",
     "standard": "^13.1.0"
   },
   "standard": {
-    "env": [ "jest", "es6" ]
+    "env": [
+      "jest",
+      "es6"
+    ]
   }
 }
