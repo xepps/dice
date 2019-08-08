@@ -1,6 +1,10 @@
 const diceRoller = require('../src')
 
 describe('The dice roller', () => {
+  it('should roll the dice!', () => {
+    expect(diceRoller('1d6') <= 6).toBeTruthy()
+  })
+
   describe('Simple Rolls', () => {
     it('should complete simple rolls', () => {
       const fakeRandom = () => 0.5
@@ -40,6 +44,11 @@ describe('The dice roller', () => {
     it('should add on a simple number', () => {
       const fakeRandom = () => 0.5
       expect(diceRoller('1d20+5', fakeRandom)).toEqual(16)
+    })
+
+    it('should add on a simple number', () => {
+      const fakeRandom = () => 0.5
+      expect(diceRoller('1d20+15', fakeRandom)).toEqual(26)
     })
   })
 })
