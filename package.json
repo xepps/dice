@@ -1,0 +1,30 @@
+{
+  "name": "dice",
+  "version": "1.0.0",
+  "description": "It rolls dice based on the roll20 dice functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard && jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xepps/dice.git"
+  },
+  "keywords": [
+    "dice",
+    "roll20"
+  ],
+  "author": "Kristian Epps",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xepps/dice/issues"
+  },
+  "homepage": "https://github.com/xepps/dice#readme",
+  "devDependencies": {
+    "jest": "^24.8.0",
+    "standard": "^13.1.0"
+  },
+  "standard": {
+    "env": [ "jest", "es6" ]
+  }
+}
