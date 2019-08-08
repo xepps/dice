@@ -14,16 +14,17 @@ describe('The dice roller', () => {
       expect(diceRoller('3d12', fakeRandom)).toEqual(21)
     })
 
-    it('should work with addtion', () => {
+    it('should work with addition', () => {
       const fakeRandom = () => 0.5
       expect(diceRoller('1d6 + 2', fakeRandom)).toEqual(4 + 2)
     })
 
     it('should keep or drop the highest value die/s rolled', () => {
-      const fakeRandom = () => sinon.stub()
-        .onFirstCall(0.5)
-        .onSecondCall(0.75)
-        .onThirdCall(0.25)
+      const fakeRandom = sinon.stub()
+        .returns(0.5)
+        .onSecondCall().returns(0.75)
+        .onThirdCall().returns(0.25)
+
       expect(diceRoller('3d20k2', fakeRandom)).toEqual(27)
     })
   })

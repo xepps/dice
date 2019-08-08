@@ -1,24 +1,27 @@
+
+const sum = (numbers) => numbers.reduce((a, b) => a + b)
+
 const performRolls = (rand, dieCount, dieSize) => {
-  return Array(Number(dieCount)).fill(0).map(_ => Math.floor(rand() * Number(dieSize) + 1))
+  const performRoll = () => Math.floor(rand() * Number(dieSize) + 1)
+  return Array.from({ length: dieCount }, performRoll)
+}
+
+const parseRollExpression = (rand, expr) => {
+  const [dieCount, dieSize, keep] = expr.split(/[dk]/g)
+  const rolls = performRolls(rand, dieCount, dieSize)
+
+  if (keep !== undefined) {
+    rolls.sort((a, b) => b - a)
+    while (rolls.length > keep) rolls.pop()
+  }
+
+  return sum(rolls)
 }
 
 const diceRoller = (command, rand = Math.random) => {
-  const reduced = command.replace(/\d+[d]\d+(k\d+)?/g, (match) => {
-    const [dieCount, dieSize, keep] = match.split(/[dk]/g)
-    console.log(dieCount, dieSize, keep)
-    const rolls = performRolls(rand, dieCount, dieSize)
-    console.log(rolls)
-    return rolls.reduce((a, b) => a + b)
-  })
-  console.log(reduced)
-
-  // let [die, value] = command.split('+')
-  // die = die.trim()
-  // value = value ? value.trim() : 0
-  // const [count, dieSize] = die.split(/\d+d/)
-
-  // return count * Math.floor(rand() * dieSize + 1) + +value
-  return +reduced.split('+').reduce((a, b) => Number(a) + Number(b))
+  const parser = (expr) => parseRollExpression(rand, expr)
+  const reducedCommand = command.replace(/\d+[d]\d+(k\d+)?/g, parser)
+  return reducedCommand.split('+').map(Number).reduce((a, b) => a + b)
 }
 
 module.exports = diceRoller
