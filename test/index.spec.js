@@ -50,5 +50,25 @@ describe('The dice roller', () => {
       const fakeRandom = () => 0.5
       expect(diceRoller('1d20+15', fakeRandom)).toEqual(26)
     })
+
+    it('should multiply simple numbers', () => {
+      const fakeRandom = () => 0
+      expect(diceRoller('2*1d2', fakeRandom)).toEqual(2)
+    })
+  })
+
+  describe('add 2 dice together', () => {
+    it('should add 2 rolls of dice together', () => {
+      const fakerandom = () => 0
+      expect(diceRoller('1d5 + 1d9', fakerandom)).toEqual(2)
+    })
+    it('should add 2 rolls of dice together', () => {
+      const fakerandom = () => 0.99
+      expect(diceRoller('10000d10 + 1000000d100', fakerandom)).toEqual(100100000)
+    })
+    it('should handle multiple operations', () => {
+      const fakeRandom = () => 0
+      expect(diceRoller('2*1d2+2*1d2', fakeRandom)).toEqual(4)
+    })
   })
 })
